@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Creative Agency</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+
+:root {
+  --primary-color: #f60f20;
+  --secondary-color: #1b206e;
+}
+
+/* BASE STYLES */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #111;
+}
+
+h1 {
+  font-size: 30px;
+  font-weight: 500;
+}
+
+p {
+  margin: 20px 0 10px;
+  font-size: 1.1rem;
+}
+
+i {
+  font-size: 70px;
+}
+section {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  align-items: center;
+  padding: 100px;
+  margin-top: 60px;
+}
+
+section.home {
+  flex-direction: row;
+  margin-top: 0;
+}
+
+/* BUTTON */
+.btn {
+  cursor: pointer;
+  display: inline-block;
+  background: var(--primary-color);
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 30px;
+  margin: 20px 0;
+  border: 0;
+}
+
+.btn:hover {
+  transform: scale(0.98);
+}
+
+.logo {
+  position: absolute;
+  top: 30px;
+  left: 100px;
+  font-size: 2rem;
+  font-weight: 700;
+  z-index: 20;
+}
+
+/* TOGGLE */
+.toggle {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  background: var(--primary-color) url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAARVBMVEX///8AAAB/f38jIyNZWVk0NDSIiIj19fWQkJDT09NjY2Pm5uZGRkaoqKjw8PDLy8uvr68vLy+dnZ09PT04ODgICAgPDw9VdLfvAAABDklEQVR4nO3bSXKDQAxAUTqAjec59z9qdtl2Ci3kyO+doH9RgMtIwwAAAAAAAAAAAAAAAAAAAAAAwDvYLvO41rycs4/ft2sxu+yAnm0wsLVtdkLHEi5cshM65nDhnJ3QMYYLx+yEjmO48Jid0HEKF56yE3qewcBndkDXeQoFTv/glT9cNl9rbS7ZhwcAAAB+XffTWvtr9uH/4HAL/U9zO2QHdL1Cga29sgN67sHA1u7ZCR2PcOEjO6Gj/neL+tew/n04fAcD3/5Z+gHvw/q/aQAAAOBTVJ9NrD9fWn5GuP6cd/1Z/frfLervzNTfe6q/u1Z//zC6Q/r2VxAAAAAAAAAAAAAAAAAAAAAA4EP8ADccDrAhl7hMAAAAAElFTkSuQmCC);
+  background-size: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 20;
+  cursor: pointer;
+}
+
+.toggle.active {
+  background: var(--primary-color) url(data:image/png;base64,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);
+  background-size: 25px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* NAVIGATION */
+.navigation {
+  position: fixed;
+  top: 0;
+  left: 100%;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  z-index: 15;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navigation.active {
+  left: 0;
+}
+
+.navigation ul {
+  position: relative;
+}
+
+.navigation ul li {
+  position: relative;
+  list-style: none;
+  text-align: center;
+}
+
+.navigation ul li a {
+  font-size: 2.2rem;
+  color: #111;
+  text-decoration: none;
+  font-weight: 300;
+}
+
+.navigation ul li a:hover {
+  color: var(--primary-color);
+}
+
+.navigation .social-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navigation .social-bar a {
+  display: inline-block;
+  transform: scale(0.5);
+}
+
+.navigation .email-icon {
+  position: absolute;
+  bottom: 20px;
+  transform: scale(0.5);
+}
+
+/* HOMEPAGE */
+.home-content {
+  position: relative;
+  z-index: 10;
+  max-width: 600px;
+}
+
+.home-img {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 110%;
+}
+
+/* SERVICES PAGE */
+.services {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  text-align: center;
+}
+
+.services .service {
+  padding: 30px;
+}
+
+.services .service:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.services .service h2 {
+  font-size: 24px;
+  font-weight: 500;
+  margin-top: 20px;
+  color: var(--secondary-color);
+}
+
+.services .service .icon img {
+  max-width: 100px;
+}
+
+/* WORK PAGE */
+.portfolio {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.portfolio .item {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 5px;
+}
+
+.portfolio .item img {
+  width: 100%;
+  height: 100%;
+}
+
+.portfolio .item .action {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.portfolio .item:hover .action {
+  opacity: 1;
+}
+
+.portfolio .item .action a {
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+  border: 1px solid #fff;
+  padding: 5px 15px;
+}
+
+/* CONTACT */
+.contact {
+  position: relative;
+  width: 100%;
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.contact-form {
+  position: relative;
+  background: #f9f9f9;
+  width: calc(100% - 400px);
+  padding: 60px 40px 20px;
+}
+
+.contact-form form {
+  width: 100%;
+}
+
+.contact-form .row {
+  width: 100%;
+  display: flex;
+}
+
+.contact-form .input50 {
+  width: 50%;
+  margin: 0 10px;
+}
+
+.contact-form .input100 {
+  width: 100%;
+  margin: 0 10px;
+}
+
+.contact-form .row input,
+.contact-form .row textarea {
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: #111;
+  background: transparent;
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  font-size: 16px;
+  font-weight: 300;
+  margin: 10px 0;
+  resize: none;
+}
+
+.contact-form .row textarea {
+  height: 150px;
+}
+
+.contact-form .row input[type='submit'] {
+  background-color: var(--secondary-color);
+  color: #fff;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 300;
+  border: 0;
+  cursor: pointer;
+}
+
+.contact-info {
+  width: 350px;
+  background: #f9f9f9;
+  padding: 60px 40px 20px;
+}
+
+.contact-info .info-box {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
+.contact-info .info-box .contact-icon {
+  width: 20px;
+  margin-right: 40px;
+}
+
+.contact-info .info-box .details h4 {
+  color: var(--secondary-color);
+}
+
+.contact-info .info-box .details p,
+.contact-info .info-box .details a {
+  color: #111;
+}
+
+@media (max-width: 1068px) {
+  .home-img {
+    display: none;
+  }
+
+  .logo {
+    top: 10px;
+    left: 40px;
+    font-size: 1.5rem;
+  }
+
+  section {
+    padding: 100px 40px;
+  }
+
+  .navigation ul li a {
+    font-size: 2rem;
+  }
+
+  .services {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contact {
+    flex-direction: column;
+  }
+
+  .contact-form {
+    width: 100%;
+    padding: 30px 30px 20px;
+  }
+
+  .contact-form .row {
+    flex-direction: column;
+  }
+
+  .contact-form .input50,
+  .contact-form .input100 {
+    width: 100%;
+    margin: 0;
+  }
+
+  .contact-info {
+    width: 100%;
+    margin-top: 20px;
+    padding: 30px 30px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .services {
+    grid-template-columns: 1fr;
+  }
+
+  .services .service {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">Creative Agency</div>
+      <div class="toggle"></div>
+      <div class="navigation">
+        <ul>
+          <li><a href="/index">Home</a></li>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/work">Work</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+        <div class="social-bar">
+          <ul>
+            <li>
+              <a href="https://facebook.com">
+                <i class="fa-brands fa-facebook"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com">
+                <i class="fa-brands fa-square-twitter"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://instagram.com">
+                <i class="fa-brands fa-square-instagram"></i>
+              </a>
+            </li>
+          </ul>
+          <a href="mailto:you@email.com" class="email-icon">
+            <i class="fa-solid fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <section class="home">
+      <img src="https://s27086.pcdn.co/wp-content/uploads/2019/01/word.jpg" class="home-img" alt="" />
+      <div class="home-content">
+        <h1>
+          We help to achieve <br />
+          your goals.
+        </h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo itaque
+          nam saepe vero voluptatem vel fuga a eaque earum alias ipsam
+          aspernatur culpa maxime laboriosam, impedit quae officiis consectetur
+        </p>
+        <a href="/contact" class="btn">Get Started</a>
+      </div>
+    </section>
+
+    <script>
+      const toggle = document.querySelector('.toggle')
+const navigation = document.querySelector('.navigation')
+
+toggle.addEventListener('click', () => {
+  toggle.classList.toggle('active')
+  navigation.classList.toggle('active')
+})
+
+    </script>
+  </body>
+</html>
